@@ -1,0 +1,5 @@
+#!/bin/bash
+
+### Подгрузка alias'ов ###
+if [ -f ~/.userrc/aliases ]; then source ~/.userrc/aliases; fi
+
