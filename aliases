@@ -11,7 +11,7 @@ fi
 alias c-drop-caches='( sudo sync && ( echo 3 | sudo tee -a /proc/sys/vm/drop_caches ) && sudo sync ) >/dev/null 2>&1'
 
 ### Работа с vmware-tools ###
-if [ -f ~/.userrc/scripts/reload-vmtoolsd.sh ] && [ -f /usr/bin/vmware* ];
+if [ -f ~/.userrc/scripts/reload-vmtoolsd.sh ];
 then
     alias c-reload-vmtools='~/.userrc/scripts/reload-vmtoolsd.sh'
 fi
