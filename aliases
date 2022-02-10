@@ -2,8 +2,11 @@
 if [ -f /usr/bin/pacman ];
 then
     alias c-update-packages="sudo pacman -Suy"
-	alias c-remove-orphaned-packages="sudo pacman -Rs $(sudo pacman -Qtdq)"
-else
+	alias c-remove-orphaned-packages='sudo pacman -Rs $(sudo pacman -Qtdq)'
+fi
+
+if [ -f /usr/bin/apt ];
+then
     alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade; sudo apt -y autoremove"
     alias c-apt-fix="sudo apt -y --fix-broken install"
 fi
