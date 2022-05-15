@@ -3,3 +3,33 @@
 ### Подгрузка alias'ов ###
 if [ -f ~/.userrc/aliases ]; then source ~/.userrc/aliases; fi
 
+case "$CC_COMPILER" in
+	"clang")
+		# Выбран clang.
+		export LLVM=1;
+		export LLVM_IAS=1;
+		export CC=clang;
+		export CXX=clang++;
+		export CPP="$CXX";
+		export LD=ld.lld;
+		export AR=llvm-ar;
+		export NM=llvm-nm;
+		export STRIP=llvm-strip;
+		export READELF=llvm-readelf;
+		export HOSTCC=clang;
+		export HOSTCXX=clang++;
+		export HOSTAR=llvm-ar;
+		export HOSTLD=ld.lld;
+		export OBJCOPY=llvm-objcopy;
+		export OBJDUMP=objdump;
+		export BUILD_FLAGS="LLVM=1 LLVM_IAS=1 CC=clang CXX=clang++ LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip READELF=llvm-readelf HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar HOSTLD=ld.lld OBJCOPY=llvm-objcopy OBJDUMP=objdump";
+		;;
+	"g")
+		# Выбран gcc.
+		# Уставить установки по умолчанию.
+		;;
+	*)
+		echo "[Warning] Unknown compiler. Skipping ...";
+		;;
+esac;
+
