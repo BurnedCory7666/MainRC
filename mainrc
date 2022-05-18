@@ -8,20 +8,23 @@ case "$CC_COMPILER" in
 		# Выбран clang.
 		export LLVM=1;
 		export LLVM_IAS=1;
-		export CC=clang;
-		export CXX=clang++;
+		export CC='clang';
+		export CXX='clang++';
+		export CPP='clang -E';
+		export CXXCPP='clang++ -E';
 		export CPP="$CXX";
-		export LD=ld.lld;
-		export AR=llvm-ar;
-		export NM=llvm-nm;
-		export STRIP=llvm-strip;
-		export READELF=llvm-readelf;
-		export HOSTCC=clang;
-		export HOSTCXX=clang++;
-		export HOSTAR=llvm-ar;
-		export HOSTLD=ld.lld;
-		export OBJCOPY=llvm-objcopy;
-		export OBJDUMP=objdump;
+		export LD='ld.lld';
+		export AR='llvm-ar';
+		export NM='llvm-nm';
+		export STRIP='llvm-strip';
+		export READELF='llvm-readelf';
+		export HOSTCC='clang';
+		export HOSTCXX='clang++';
+		export HOSTAR='llvm-ar';
+		export HOSTLD='ld.lld';
+		export OBJCOPY='llvm-objcopy';
+		export OBJDUMP='objdump';
+		export CCDEPMODE='depmode=gcc3';
 		export BUILD_FLAGS="LLVM=1 LLVM_IAS=1 CC=clang CXX=clang++ LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip READELF=llvm-readelf HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar HOSTLD=ld.lld OBJCOPY=llvm-objcopy OBJDUMP=objdump";
 		;;
 	"g")
