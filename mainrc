@@ -27,9 +27,27 @@ case "$CC_COMPILER" in
 		export CCDEPMODE='depmode=gcc3';
 		export BUILD_FLAGS="LLVM=1 LLVM_IAS=1 CC=clang CXX=clang++ LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip READELF=llvm-readelf HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar HOSTLD=ld.lld OBJCOPY=llvm-objcopy OBJDUMP=objdump";
 		;;
-	"g")
+	"gcc")
 		# Выбран gcc.
-		# Уставить установки по умолчанию.
+		export LLVM=0;
+		export LLVM_IAS=0;
+		export CC='gcc';
+		export CXX='g++';
+		export CPP='gcc -E';
+		export CXXCPP='g++ -E';
+		export CPP="$CXX";
+		export LD='ld';
+		export AR='ar';
+		export NM='nm';
+		export STRIP='strip';
+		export READELF='readelf';
+		export HOSTCC='gcc';
+		export HOSTCXX='g++';
+		export HOSTAR='ar';
+		export HOSTLD='ld';
+		export OBJCOPY='objcopy';
+		export OBJDUMP='objdump';
+		export CCDEPMODE='depmode=gcc3';
 		;;
 	*)
 		echo "[Warning] Unknown compiler. Skipping ...";
