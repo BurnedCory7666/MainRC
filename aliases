@@ -2,7 +2,7 @@
 if [ -f /usr/bin/pacman ];
 then
     alias c-update-packages="sudo pacman -Suy"
-	alias c-remove-orphaned-packages='sudo pacman -Rs $(sudo pacman -Qtdq)'
+    alias c-remove-orphaned-packages='sudo pacman -Rs $(sudo pacman -Qtdq)'
 elif [ -f /usr/bin/apt ];
 then
     alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade; sudo apt -y autoremove"
@@ -23,10 +23,10 @@ alias c-poweroff="sudo shutdown --poweroff now"
 alias c-reboot="sudo shutdown --reboot now"
 
 ### Быстрые команды просмотра списка файлов в каталогу ###
-alias ll='ls -alF'
+alias ll='ls -alF' lh='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 
-### Перевод компьютера в режим сервера/десктопа ###
+### Включить/Отключить графическое окружение ###
 alias c-graphic-session-stop="sudo systemctl stop gdm; c-drop-caches" \
       c-graphic-session-start="sudo systemctl start gdm"
