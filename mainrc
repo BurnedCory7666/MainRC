@@ -1,7 +1,14 @@
 #!/bin/bash
 
+### Выход, если путь к mainrc не установлен ###
+if [[ -z "$MAINRC_PATH" ]];
+then
+	echo "[Error] The MAINRC_PATH variable is not set. Abort changes.";
+	return;
+fi;
+
 ### Подгрузка alias'ов ###
-if [ -f ~/.userrc/aliases ]; then source ~/.userrc/aliases; fi
+if [ -f "${MAINRC_PATH}/aliases" ]; then source "${MAINRC_PATH}/aliases"; fi
 
 ### Установка переменных в соответствие с выбранным компилятором ###
 case "$CC_COMPILER" in
