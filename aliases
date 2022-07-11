@@ -30,3 +30,9 @@ alias l='ls -CF'
 ### Включить/Отключить графическое окружение ###
 alias c-graphic-session-stop="sudo systemctl stop gdm; c-drop-caches" \
       c-graphic-session-start="sudo systemctl start gdm"
+
+# Переопределение стандартных программ
+if [ -f /bin/htop ];
+then
+	alias htop="sudo /bin/htop";
+fi;
