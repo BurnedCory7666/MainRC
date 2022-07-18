@@ -32,6 +32,9 @@ case "$CC_COMPILER" in
 		export OBJCOPY='/bin/llvm-objcopy';
 		export OBJDUMP='/bin/objdump';
 		export CCDEPMODE='depmode=gcc3';
+
+		export CMAKE_C_COMPILER='/bin/clang';
+		export CMAKE_CXX_COMPILER='/bin/clang++';
 		;;
 	"gcc")
 		# Выбран gcc.
@@ -54,6 +57,9 @@ case "$CC_COMPILER" in
 		unset OBJCOPY;
 		unset OBJDUMP;
 		unset CCDEPMODE;
+
+		export CMAKE_C_COMPILER='/bin/gcc';
+		export CMAKE_CXX_COMPILER='/bin/g++';
 		;;
 	*)
 		echo "[Warning] Unknown compiler. Skipping ...";
