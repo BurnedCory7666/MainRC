@@ -5,8 +5,14 @@ then
     alias c-remove-orphaned-packages='sudo pacman -Rs $(sudo pacman -Qtdq)'
 elif [ -f /usr/bin/apt ];
 then
-    alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade; sudo apt -y autoremove"
+    if [ -f /usr/bin/snap ];
+    then
+        alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade"
+    else
+        alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade; sudo snap refresh"
+    fi;
     alias c-apt-fix="sudo apt -y --fix-broken install"
+    alias c-remove-orphaned-packages='sudo apt -y autoremove'
 fi
 
 ### Работа с кешем ###
