@@ -1,44 +1,56 @@
-### Работа с пакетными менеджерами ###
-if [ -f /usr/bin/pacman ];
+if [ -n "$(which pacman)" ];
 then
-    alias c-update-packages="sudo pacman -Suy"
-    alias c-remove-orphaned-packages='sudo pacman -Rs $(sudo pacman -Qtdq)'
-elif [ -f /usr/bin/apt ];
-then
-    if [ -f /usr/bin/snap ];
+# For pacman-based
+    if [ -n "$(which paru)" ];
     then
-        alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade"
+        alias c-update-packages="paru -Suy"
     else
-        alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade; sudo snap refresh"
+        alias c-update-packages="sudo pacman -Suy"
+    fi
+    alias c-remove-orphaned-packages='sudo pacman -Rs $(sudo pacman -Qtdq)'
+elif [ -n "$(which apt)" ];
+then
+# For apt-based
+    alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade"
+    if [ -n "$(which snap)" ];
+    then
+        alias c-update-packages="$(alias c-update-packages); sudo snap refresh"
     fi;
     alias c-apt-fix="sudo apt -y --fix-broken install"
     alias c-remove-orphaned-packages='sudo apt -y autoremove'
 fi
 
-### Работа с кешем ###
 alias c-drop-caches='( sudo sync && ( echo 3 | sudo tee -a /proc/sys/vm/drop_caches ) && sudo sync ) >/dev/null 2>&1'
 
-### Работа с vmware-tools ###
-if [ -f ~/.userrc/scripts/reload-vmtoolsd.sh ];
+if [ -f ~/.userrc/scripts/reload-vmtoolsd.sh ] && ( systemctl status vmtoolsd &>/dev/null );
 then
+# For VMware vm-tools
     alias c-reload-vmtools='~/.userrc/scripts/reload-vmtoolsd.sh'
 fi
 
-### Выключение/Перезагрузка ###
-alias c-poweroff="sudo shutdown --poweroff now"
+if [ "$MAINRC_SHUTDOWN_GUARD" = "on" ] && [ -n "$SSH_CONNECTION" ];
+then
+    alias c-poweroff=""
+else
+    alias c-poweroff="sudo shutdown --poweroff now"
+fi
 alias c-reboot="sudo shutdown --reboot now"
 
-### Быстрые команды просмотра списка файлов в каталогу ###
-alias ll='ls -alF' lh='ls -alFh'
+alias ll='ls -alF'
+alias lh='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 
-### Включить/Отключить графическое окружение ###
-alias c-graphic-session-stop="sudo systemctl stop gdm; c-drop-caches" \
-      c-graphic-session-start="sudo systemctl start gdm"
-
-# Переопределение стандартных программ
-if [ -f /bin/htop ];
+if ( systemctl status gdm &>/dev/null );
 then
-	alias htop="sudo /bin/htop";
-fi;
+    alias c-graphic-session-stop="sudo systemctl stop gdm" \
+          c-graphic-session-start="sudo systemctl start gdm"
+fi
+
+if [ "$MAINRC_SHUTDOWN_GUARD" = "on" ];
+then
+    if [ -n "$(which htop)" ];
+    then
+        alias htop="sudo /bin/htop"
+    fi
+fi

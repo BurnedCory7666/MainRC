@@ -1,17 +1,20 @@
 # MainRC
-## Usage:
-1. ```git clone https://github.com/BurnedCory7666/MainRC.git```
-2. Add at the end of `.bashrc` or `.zshrc` following:
-  ```bash
-MAINRC_PATH=~/.userrc/;
-CC_COMPILER="gcc";
-if [[ -f "${MAINRC_PATH}/mainrc" ]];
-then
-	source "${MAINRC_PATH}/mainrc";
-fi;
-  ```
-3. ```source ~/.zshrc``` or ```source ~/.bashrc```
 
-## Variables to change:
-1. `MAINRC_PATH` -> path to cloned directory with mainrc-file.
-2. `CC_COMPILER` [optional] -> set variables to use this compiler. Possible values: `clang`. `gcc`.
+## Usage:
+1. Do cloning.
+2. Add at the end of `.zshrc` or `.bashrc` following:
+  ```bash
+MAINRC_PATH=~/.userrc/
+source "${MAINRC_PATH}/mainrc"
+  ```
+3. ```source ~/.zshrc``` or ```source ~/.bashrc``` or restart session.
+
+
+
+## Config
+
+| Name | Type/Values | Description |
+|------|-------------|-------------|
+| `MAINRC_CC_COMPILER` | `clang`/`gcc` | Configure variables to use specified compiler. |
+| `MAINRC_RUN_PROGS_AS_ROOT` | `on`/`off` | If `on`, add or replace aliases to run some programs as root. |
+| `MAINRC_SHUTDOWN_GUARD` | `on`/`off` | If `on`, disable `c-poweroff` alias for SSH connections. |

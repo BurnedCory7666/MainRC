@@ -1,0 +1,51 @@
+case "$MAINRC_CC_COMPILER" in
+"clang")
+    export LLVM=1
+    export LLVM_IAS=1
+    export CC='/bin/clang'
+    export CXX='/bin/clang++'
+    export CPP='/bin/clang -E'
+    export CXXCPP='/bin/clang++ -E'
+    export LD='/bin/ld.lld'
+    export AR='/bin/llvm-ar'
+    export NM='/bin/llvm-nm'
+    export STRIP='/bin/llvm-strip'
+    export READELF='/bin/llvm-readelf'
+    export HOSTCC="$CC"
+    export HOSTCXX="$CXX"
+    export HOSTAR="$AR"
+    export HOSTLD="$LD"
+    export OBJCOPY='/bin/llvm-objcopy'
+    export OBJDUMP='/bin/objdump'
+    export CCDEPMODE='depmode=gcc3'
+    export CMAKE_C_COMPILER='/bin/clang'
+    export CMAKE_CXX_COMPILER='/bin/clang++'
+    ;;
+
+"gcc")
+    unset LLVM
+    unset LLVM_IAS
+    unset CC
+    unset CXX
+    unset CPP
+    unset CXXCPP
+    unset LD
+    unset AR
+    unset NM
+    unset STRIP
+    unset READELF
+    unset HOSTCC
+    unset HOSTCXX
+    unset HOSTAR
+    unset HOSTLD
+    unset OBJCOPY
+    unset OBJDUMP
+    unset CCDEPMODE
+    export CMAKE_C_COMPILER='/bin/gcc'
+    export CMAKE_CXX_COMPILER='/bin/g++'
+    ;;
+
+*)
+    echo "[Warning] Unknown compiler. Skipping ..."
+    ;;
+esac

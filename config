@@ -1,0 +1,3 @@
+export MAINRC_CC_COMPILER="gcc"
+export MAINRC_RUN_PROGS_AS_ROOT=on
+export MAINRC_SHUTDOWN_GUARD=on
