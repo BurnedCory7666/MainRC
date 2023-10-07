@@ -2,6 +2,10 @@ function which_q() {
     which $* &>/dev/null
 }
 
+function is_unit_exists() {
+    test `systemctl list-units | grep "$1" | wc -l` -gt 0 &>/dev/null
+}
+
 if [ -n "$(which_q pacman)" ];
 then
 # For pacman-based
@@ -29,7 +33,7 @@ fi
 
 alias c-drop-caches='( sudo sync && ( echo 3 | sudo tee -a /proc/sys/vm/drop_caches ) && sudo sync ) >/dev/null 2>&1'
 
-if [ -f ~/.userrc/scripts/reload-vmtoolsd.sh ] && ( systemctl status vmtoolsd &>/dev/null );
+if [ -f ~/.userrc/scripts/reload-vmtoolsd.sh ] && is_unit_exists 'vmtoolsd';
 then
 # For VMware vm-tools
     alias c-reload-vmtools='~/.userrc/scripts/reload-vmtoolsd.sh'
@@ -48,7 +52,7 @@ alias lh='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
 
-if ( systemctl status gdm &>/dev/null );
+if is_unit_exists 'gdm';
 then
     alias c-graphic-session-stop="sudo systemctl stop gdm" \
           c-graphic-session-start="sudo systemctl start gdm"
