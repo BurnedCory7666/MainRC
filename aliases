@@ -1,23 +1,30 @@
-if [ -n "$(which pacman)" ];
+function which_q() {
+    which $* &>/dev/null
+}
+
+if [ -n "$(which_q pacman)" ];
 then
 # For pacman-based
-    if [ -n "$(which paru)" ];
+    if [ -n "$(which_q paru)" ];
     then
         alias c-update-packages="paru -Suy"
     else
         alias c-update-packages="sudo pacman -Suy"
     fi
     alias c-remove-orphaned-packages='sudo pacman -Rs $(sudo pacman -Qtdq)'
-elif [ -n "$(which apt)" ];
+elif [ -n "$(which_q apt)" ];
 then
 # For apt-based
     alias c-update-packages="sudo apt -y update && sudo apt -y full-upgrade"
-    if [ -n "$(which snap)" ];
+    if [ -n "$(which_q snap)" ];
     then
         alias c-update-packages="$(alias c-update-packages); sudo snap refresh"
     fi;
     alias c-apt-fix="sudo apt -y --fix-broken install"
     alias c-remove-orphaned-packages='sudo apt -y autoremove'
+elif [ -n "$(which_q dnf)" ];
+then
+    alias c-update-packages="sudo dnf update -y"
 fi
 
 alias c-drop-caches='( sudo sync && ( echo 3 | sudo tee -a /proc/sys/vm/drop_caches ) && sudo sync ) >/dev/null 2>&1'
@@ -49,7 +56,7 @@ fi
 
 if [ "$MAINRC_SHUTDOWN_GUARD" = "on" ];
 then
-    if [ -n "$(which htop)" ];
+    if [ -n "$(which_q htop)" ];
     then
         alias htop="sudo /bin/htop"
     fi
