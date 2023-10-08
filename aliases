@@ -1,9 +1,11 @@
 function which_q() {
-    which $* &>/dev/null
+    which $* 2>/dev/null
 }
 
 function is_unit_exists() {
-    test `systemctl list-units | grep "$1" | wc -l` -gt 0 &>/dev/null
+	systemctl is-active gdm &>/dev/null
+	test $? -lt 4
+    #test `systemctl list-units | grep "$1" | wc -l` -gt 0 &>/dev/null
 }
 
 if [ -n "$(which_q pacman)" ];
