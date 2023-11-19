@@ -67,3 +67,5 @@ then
         alias htop="sudo /bin/htop"
     fi
 fi
+
+alias c-myip='wget -O- -q ipinfo.io/ip'
