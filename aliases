@@ -68,4 +68,4 @@ then
     fi
 fi
 
-alias c-myip='wget -O- -q ipinfo.io/ip'
+alias c-myip='wget -O- -q api.ipify.org'
